@@ -15,7 +15,7 @@ module.exports.myCabinet = (bot, I18n) => {
 
         const channelsSet = new Set();
         ctx.session.channelObj = {};
-        let retMrkp;
+        let retMrkp = [];
 
         try {
             const refUser = await Analytics.findAll({
@@ -43,41 +43,10 @@ module.exports.myCabinet = (bot, I18n) => {
 
         ctx.reply(`${ctx.i18n.t('menuEnterCabinet')}`, Extra.markup(markup => {
             return markup.keyboard([
-                retMrkp ? retMrkp.flat() : [],
+                ...retMrkp,
                 [`${ctx.i18n.t('menuBack')}`]
             ]).resize();
         }))
-
-        // const channels = await Channels.findAll({
-        //     where: {
-        //         user_id: ctx.from.id
-        //     }
-        // })
-        //
-        // let channelsMrkp = [];
-        //
-        // try {
-        //     if (!_.isEmpty(channels)) {
-        //         channels.forEach(channel => {
-        //             channelsMrkp.push([channel.dataValues.channelName]);
-        //         })
-        //     }
-        //
-        //     if (channelsMrkp.length === 0) {
-        //         return ctx.scene.enter('mainMenu', {
-        //             start: `${ctx.i18n.t('channelsEmpty')}`
-        //         })
-        //     } else {
-        //         ctx.reply(ctx.i18n.t('menuEnterMyChannels'), Extra.markup(markup => {
-        //             return markup.keyboard([...channelsMrkp, [ctx.i18n.t('menuBack')]]).resize();
-        //         }))
-        //     }
-        // } catch (err) {
-        //     console.error(err.message);
-        //     ctx.scene.enter('mainMenu', {
-        //         start: ctx.i18n.t('generalErrorMsg')
-        //     })
-        // }
     });
 
     myCabinet.hears(I18n.match('menuBack'), ctx => {
@@ -88,21 +57,60 @@ module.exports.myCabinet = (bot, I18n) => {
 
     myCabinet.on('text', async ctx => {
         if (ctx.session.refChannelsMrkp.includes(ctx.message.text)) {
-            const offerSet = new Set();
-            const channelSet = new Set();
 
-            const offer = {};
 
-            for (let [key, value] of Object.entries(ctx.session.channelObj)) {
-                offerSet.add(key.split(':')[1]);
-                channelSet.add(key.split(':')[0]);
+            const offerToSend = {};
+            const offers = await Offers.findAll();
+
+            const listOffers = {};
+            const listqwer = [];
+
+            let message = '';
+
+            try {
+                for (let [key, value] of Object.entries(ctx.session.channelObj)) {
+                    if (key.split(':')[0] === ctx.message.text) {
+                        listqwer.push({id: +`${key.split(':')[1]}`, value});
+                        offerToSend[`${key.split(':')[0]}`] = listqwer;
+                    }
+                }
+
+                if(!_.isEmpty(offerToSend)) {
+                    message += `${ctx.i18n.t('cabinetForOfferChannel', {channelName: Object.keys(offerToSend)[0]})}\n\n`;
+                    Object.values(offerToSend).flat().forEach(offer =>{
+                        offers.forEach(off => {
+                            if(off.dataValues.id === offer.id) {
+                                listOffers[`${off.dataValues.offerRu}`] = offer.value;
+                            }
+                        })
+                    })
+
+                    for (let [key, value] of Object.entries(listOffers)) {
+                        message += `${ctx.i18n.t('cabinetForOfferOffer', {key, value})}\n`;
+                    }
+
+                    ctx.replyWithHTML(message);
+                }
+
+            } catch (err) {
+                console.log(err);
+                return ctx.scene.enter('mainMenu', {
+                    start: ctx.i18n.t('generalErrorMsg')
+                })
             }
-            ctx.session.referralOffersArr = Array.from(offerSet);
 
-            ctx.session.referralChannel = ctx.message.text;
 
-            ctx.scene.enter('myCabinetOffer')
+            // const offerSet = new Set();
+            // const channelSet = new Set();
+            // for (let [key, value] of Object.entries(ctx.session.channelObj)) {
+            //     offerSet.add(key.split(':')[1]);
+            //     channelSet.add(key.split(':')[0]);
+            // }
+            // ctx.session.referralOffersArr = Array.from(offerSet);
 
+            // ctx.session.referralChannel = ctx.message.text;
+
+            // ctx.scene.enter('myCabinetOffer')
 
         }
     })

@@ -79,7 +79,9 @@ stage.hears(/\/start (.+)|\/start/i, async function (ctx) {
                 const refUser = await Analytics.findOne({
                     where: {
                         user_id: ctx.from.id,
-                        referralChannel: refChannelName
+                        referralUserId: refId,
+                        referralChannel: refChannelName,
+                        offer_id: offer_id
                     }
                 })
                 if (refUser) {

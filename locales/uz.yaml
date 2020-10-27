@@ -9,6 +9,9 @@ menuLanguage: 🌐  Tilni o'zgartirish
 menuBack: ◀️ Ortga
 menuMainBack: ◀️ Asosiy Lavha
 
+cabinetForOfferChannel: <b><i>${channelName} Kanali uchun</i></b>
+cabinetForOfferOffer: <b>${key}</b> taklifi Referal ssilkasi bo'yicha \:\ ${value} odam o'tgan
+
 mainMenu: Asosiy Lavha
 menuEnterMyChannels: Mening Kanallarim
 menuEnterCabinet: |
@@ -33,6 +36,7 @@ menuAddChannelInst: |
 menuOffersChannelChoose: Iltimos hamkor taklififni biriktirmoqchi bo'lgan kanalingizni tanlang.
 ######################################################Каналы
 channelsEmpty: Kechirasiz sizda hali qo'shilgan kannalar mavjud emas
+channelsEmptyOfferr: Kechirasiz sizda takliflarni biriktirish uchun qo'shilgan kannalar mavjud emas
 parntersEmpty: Kechirasiz hali qo'shilgan hamkor mavjud emas
 parntersNoOffer: Kechirasiz ushbu hamkordan takliflar hali mavjud emas
 notAdminMessage: Iltimos botni administrator qilib, qaytadan yozuvli xabar yo'llab ko'ring

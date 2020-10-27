@@ -15,6 +15,7 @@ module.exports.partnersScene = (bot, I18n) => {
     partnersScene.enter(async (ctx) => {
 
         const partners = await Partners.findAll();
+        const channels = await Channels.findAll({where: {user_id: ctx.from.id}});
         ctx.session.partnersArray = [];
 
 
@@ -25,6 +26,12 @@ module.exports.partnersScene = (bot, I18n) => {
         }
 
         let partnersMrkp = [];
+
+        if(_.isEmpty(channels)){
+            return ctx.scene.enter('mainMenu', {
+                start: ctx.i18n.t('channelsEmptyOfferr')
+            })
+        }
 
         try {
             if (!_.isEmpty(partners)) {
@@ -175,25 +182,20 @@ module.exports.offersCreateReferalScene = (bot, I18n) => {
 
     offersCreateReferalScene.on('text', async ctx => {
         if (ctx.session.usersOfferChannels.flat(2).includes(ctx.message.text)) {
-            let offerCaption;
-            if (ctx.session.chosenLanguage === 'ru') {
-                offerCaption = `
+
+            let offerCaptionRu = `
 ${ctx.session.offerToReturn.descriptionRu}
             
-${ctx.i18n.t('referralUrl')}:
-            
 t.me/mannagee_bot?start=${ctx.from.id}_-_${ctx.message.text}_-_${ctx.session.offerToReturn.id}
 `;
-            } else {
-                offerCaption = `
+            let offerCaptionUz = `
 ${ctx.session.offerToReturn.descriptionUz}
             
-${ctx.i18n.t('referralUrl')}:
-            
 t.me/mannagee_bot?start=${ctx.from.id}_-_${ctx.message.text}_-_${ctx.session.offerToReturn.id}
 `;
-            }
-            await ctx.replyWithPhoto(`${ctx.session.offerToReturn.photoUrl}`, Extra.caption(offerCaption));
+
+            await ctx.replyWithPhoto(`${ctx.session.offerToReturn.photoUrl}`, Extra.caption(offerCaptionUz));
+            await ctx.replyWithPhoto(`${ctx.session.offerToReturn.photoUrl}`, Extra.caption(offerCaptionRu));
 
             return ctx.scene.enter('mainMenu', {
                 start: ctx.i18n.t('referalUrlGotSuccessfully'),

@@ -118,7 +118,7 @@ module.exports.addChannelConfirm = (bot, I18n) => {
                 if (channel) {
                     ctx.reply(ctx.i18n.t('channelExistsForUser'));
                 } else {
-                    Channels.create({
+                    await Channels.create({
                         user_id: ctx.from.id,
                         username: ctx.from.username,
                         channelName: channelName

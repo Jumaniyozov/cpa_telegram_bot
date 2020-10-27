@@ -14,12 +14,10 @@ module.exports = (bot, I18n) => {
         let message = `${ctx.i18n.t('greeting', {username: ctx.from.username})}`;
 
         const unauthMsg = [
-            [`${ctx.i18n.t('menuMyChannels')}`],
-            [`${ctx.i18n.t('menuCabinet')}`],
-            !_.isEmpty(channels) ? [`${ctx.i18n.t('menuOffers')}`] : [],
-            [`${ctx.i18n.t('menuChannelSettings')}`],
-            [`${ctx.i18n.t('menuInstructions')}`],
-            [`${ctx.i18n.t('menuLanguage')}`],
+            [`${ctx.i18n.t('menuMyChannels')}`, `${ctx.i18n.t('menuCabinet')}`],
+            !_.isEmpty(channels) ? [`${ctx.i18n.t('menuOffers')}`, `${ctx.i18n.t('menuChannelSettings')}`] : [`${ctx.i18n.t('menuChannelSettings')}`],
+            [`${ctx.i18n.t('menuInstructions')}`, `${ctx.i18n.t('menuLanguage')}`],
+            [],
         ]
 
         if (ctx.scene.state.start) {
@@ -27,7 +25,7 @@ module.exports = (bot, I18n) => {
         }
 
 
-        const msg = bot.telegram.sendMessage(ctx.chat.id, message, {
+        bot.telegram.sendMessage(ctx.chat.id, message, {
             parse_mode: 'HTML',
             reply_markup: {
                 keyboard: unauthMsg,
@@ -35,7 +33,6 @@ module.exports = (bot, I18n) => {
             }
         })
 
-        ctx.session.mesage_filter.push((await msg).message_id);
     })
 
 
