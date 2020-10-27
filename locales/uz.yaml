@@ -1,0 +1,55 @@
+menuInstructions: ❗ Instruktsiyalar
+menuMyChannels: 🗨️ Mening Kanallarim
+menuOffers: 📁 Takliflar
+menuCabinet: 🗄️ Shaxsiy Kabinet
+menuChannelSettings: 🔐 Kanallar boshqaruvi
+menuAddChannel: ➕ Kanal Qo'shish
+menuDeleteChannel: ➖ Kanal O'chirish
+menuLanguage: 🌐  Tilni o'zgartirish
+menuBack: ◀️ Ortga
+menuMainBack: ◀️ Asosiy Lavha
+
+mainMenu: Asosiy Lavha
+menuEnterMyChannels: Mening Kanallarim
+menuEnterCabinet: |
+  Shaxsiy Kabinet
+
+  Referal ssilkalarni ishlatilish statistikasini ko'rish uchun iltimoos kanalni tanlang
+
+menuEnterOffers: Iltimos taklifni biriktirmoqchi bo'lgan kanalingizni tanlang
+menuEnterPartners: Iltimos taklif olmoqchi bo'lgan hamkorni tanlang
+menuCabinetOfferReferal: Iltimos kanalingizga bog'lagan taklifni tanlang
+menuEnterInstructions: Instruktsiyalar
+menuEnterAddChannel: Kanal Qo'shish
+menuEnterDeleteChannel: Iltimos o'chirmoqchi bo'lgan kanalingizni tanlang
+menuAddChannelInst: |
+  <b>Kanal qo'shish</b>
+
+  Kanal qo'shish uchun quyidage ikkita shartni bajarishingiz kerak:
+
+  1. <i>'@mannagee_bot'</i>ni kanalingiz administratorlari qatoriga qo'shing.
+  2. Kanalingizdan menga istalgan xabarni yuboring.
+
+menuOffersChannelChoose: Iltimos hamkor taklififni biriktirmoqchi bo'lgan kanalingizni tanlang.
+######################################################Каналы
+channelsEmpty: Kechirasiz sizda hali qo'shilgan kannalar mavjud emas
+parntersEmpty: Kechirasiz hali qo'shilgan hamkor mavjud emas
+parntersNoOffer: Kechirasiz ushbu hamkordan takliflar hali mavjud emas
+notAdminMessage: Iltimos botni administrator qilib, qaytadan yozuvli xabar yo'llab ko'ring
+channelExistsForUser: Kechirasiz siz bu kanalni qo'shib bo'lgansiz
+channelAddedSuccessfully: Kanal muvafaqiyatli qo'shildi
+channelDeletedSuccessfully: Kanal muvafaqiyatli o'chirildi
+channelReferralSuccess: Sizga bonuslar muvaffaqiyatli taqdim etildi
+channelReferralUnsuccess: Kechirasiz sizga bu bonuslar taqdim etilib bo'lgan
+channelReferralUserUsed: Referal ssilkangiz bo'yicha o'tgan foydalanuvchilar soni
+referalUrlGotSuccessfully: Siz muvafaqiyatli referal ssilka oldingiz ushbu ssilkani kanalingizda foydalanuvchilar bilan ulashing. Siz hamda foydalanuvchilaringiz bonuslarga ega bo'lasizlar.
+
+langChoose: Iltimos tilni tanlang
+referralUrl: Sizning ssilkangiz
+
+generalErrorMsg: Kechirasiz xato yuz berdi, iltimos qaytadan takrorlab ko'ring
+
+greeting: |
+  Salom, ${username}!
+
+  Ushbu bot foydalanuvchilar va kanal egalariga Telegramda o'zaro aloqani yaxshilash, shuningdek turli brend va kompaniyalarga o'z takliflari qoldirgan holda to'lovni amalga oshirishga imkon beradi.
